@@ -12,11 +12,20 @@ async function greet() {
   }
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  greetInputEl = document.querySelector("#greet-input");
-  greetMsgEl = document.querySelector("#greet-msg");
-  document.querySelector("#greet-form")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    greet();
+ 
+document.addEventListener('DOMContentLoaded', function() {
+  const startButton = document.getElementById('startButton')  as HTMLButtonElement;
+  const stopButton = document.getElementById('stopButton') as HTMLButtonElement;
+  
+  startButton?.addEventListener('click', function() {
+      // Disable Start button and enable Stop button
+      startButton.disabled = true;
+      stopButton.disabled = false;
+  });
+  
+  stopButton?.addEventListener('click', function() {
+      // Disable Stop button and enable Start button
+      startButton.disabled = false;
+      stopButton.disabled = true;
   });
 });

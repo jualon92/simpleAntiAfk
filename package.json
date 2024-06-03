@@ -10,7 +10,8 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1"
+    "@tauri-apps/api": "^1",
+    "bulma": "^1.0.1"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1",

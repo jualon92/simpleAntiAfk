@@ -10,14 +10,16 @@ It uses Tauri, a secure, lightweight, and cross-platform desktop application fra
 
 ## How to Use
 
-1. Download and install the application.
+1. Download the msi installer
 2. Click the "Start" button to start the automatic actions.
 3. To stop the automatic actions, click the "Stop" button.
 
 ## Development
 
 This application was developed using Tauri
+
 For the frontend UI, we chose to use vanilla JavaScript and TypeScript due to their lightweight nature, along with Bulma CSS for its compact package size.
+
 For more information on how to develop with Tauri, please refer to the [official Tauri documentation](https://tauri.studio).
 
 

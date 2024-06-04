@@ -21,9 +21,8 @@ For the frontend UI, we chose to use vanilla JavaScript and TypeScript due to th
 For more information on how to develop with Tauri, please refer to the [official Tauri documentation](https://tauri.studio).
 
 
-## TODO
-- **Configurable**: Users can configure the interval between automatic actions / which key to use.
-
+## Current Tasks
+https://synonymous-bolt-117.notion.site/6a7e39b76f9d4f039419966ae1e7e5db?v=71b94a57d43c4f548e7508f8d6a8debf
 ## License
 
 This application is distributed under the MIT license. Please refer to the `LICENSE` file for more details.

@@ -1,6 +1,7 @@
 # Anti-AFK Application
 
 This application is designed to help users avoid being marked as "Away" or "AFK". 
+
 It uses Tauri, a secure, lightweight, and cross-platform desktop application framework
 
 ## Features
@@ -15,7 +16,7 @@ It uses Tauri, a secure, lightweight, and cross-platform desktop application fra
 
 ## Development
 
-This application was developed using Tauri for the desktop application framework. 
+This application was developed using Tauri
 For the frontend UI, we chose to use vanilla JavaScript and TypeScript due to their lightweight nature, along with Bulma CSS for its compact package size.
 For more information on how to develop with Tauri, please refer to the [official Tauri documentation](https://tauri.studio).
 

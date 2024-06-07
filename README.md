@@ -1,6 +1,7 @@
 # Anti-AFK Application
 
 This application is designed to help users avoid being marked as "Away" or "AFK". 
+
 It uses Tauri, a secure, lightweight, and cross-platform desktop application framework
 
 ## Features
@@ -9,20 +10,21 @@ It uses Tauri, a secure, lightweight, and cross-platform desktop application fra
 
 ## How to Use
 
-1. Download and install the application.
+1. Download the msi installer
 2. Click the "Start" button to start the automatic actions.
 3. To stop the automatic actions, click the "Stop" button.
 
 ## Development
 
-This application was developed using Tauri for the desktop application framework. 
+This application was developed using Tauri
+
 For the frontend UI, we chose to use vanilla JavaScript and TypeScript due to their lightweight nature, along with Bulma CSS for its compact package size.
+
 For more information on how to develop with Tauri, please refer to the [official Tauri documentation](https://tauri.studio).
 
 
-## TODO
-- **Configurable**: Users can configure the interval between automatic actions / which key to use.
-
+## Current Tasks
+https://synonymous-bolt-117.notion.site/6a7e39b76f9d4f039419966ae1e7e5db?v=71b94a57d43c4f548e7508f8d6a8debf
 ## License
 
 This application is distributed under the MIT license. Please refer to the `LICENSE` file for more details.

@@ -1,5 +1,7 @@
+// Prevents additional console window on Windows in release, DO NOT REMOVE!!
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
 use tauri::State;
- 
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration; 
@@ -10,29 +12,6 @@ use enigo::{
 
 
 
-
-/* #[tauri::command]
-fn start_mouse_click(interval_secs: u64, state: State<'_, AppState>) {
-    let running = state.running.clone();
-    let interval = state.interval.clone();
-
-    *interval.lock().unwrap() = interval_secs;
-    *running.lock().unwrap() = true;
-
-    thread::spawn(move || {
-        let mut enigo = Enigo::new(&Settings::default()).unwrap();
-        loop {
-            {
-                let running = running.lock().unwrap();
-                if !*running {
-                    break;
-                }
-            }
-            thread::sleep(Duration::from_secs(interval_secs));
-            enigo.button(Button::Left, Press).unwrap();
-        }
-    });
-} */
 
 #[tauri::command]
 fn start_typing(interval_secs: u64, state: State<'_, AppState>) {

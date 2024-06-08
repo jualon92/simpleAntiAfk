@@ -8,13 +8,14 @@
   <title>Tauri App</title>
   <script type="module" src="/src/main.ts" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
-
+  <script src="https://kit.fontawesome.com/ec8e57b825.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <section class="section">
+  <!-- <section class="section">
     <div class="container">
 
+ 
       <div class="buttons">
         <button id="startButton" class="button is-primary is-large mr-4 ">START</button>
         <button id="stopButton" class="button is-warning is-large " disabled>STOP</button>
@@ -22,7 +23,17 @@
       </div>
 
     </div>
-  </section>
+  </section> -->
+
+  <div class="h-screen bg-gray-200">
+	
+    <div class="flex justify-center items-center h-screen">
+      
+      <button class="w-24 h-24 rounded-full bg-blue-500 focus:outline-none" onclick="play();"><i class="fa fa-play fa-2x text-white" id="play-btn"></i></button>
+  
+    </div>
+  
+  </div>
 </body>
 
 

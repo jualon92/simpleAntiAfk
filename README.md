@@ -8,13 +8,15 @@ It uses Tauri, a secure, lightweight, and cross-platform desktop application fra
 
 - **Key Press Simulation**: Simulates pressing the F23 key to prevent the system from detecting inactivity.<b> The F23 key was chosen to minimize interference with the user's normal activities. </b> 
 
-## How to Use
+## How to test it
+<code> npm i</code> 
 
 <code> npm run tauri dev</code> 
 
-or 
+## How to install 
+To build and install the application, run:
 
-<code>npm run tauri build</code>, then run installer at src-tauri\target\release\bundle\
+<code>npm run tauri build</code>, then run the installer at src-tauri\target\release\bundle\
 
 ## Development
 

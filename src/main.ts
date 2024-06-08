@@ -1,24 +1,22 @@
-import { stopClicking, startTyping } from "./actions";
-
+import { startTyping, stopClicking } from "./actions";
+ 
 document.addEventListener("DOMContentLoaded", function () {
-  const startButton = document.getElementById("startButton") as HTMLButtonElement;
-  const stopButton = document.getElementById("stopButton") as HTMLButtonElement;
 
-
+  const startButton = document.getElementById('play-btn') as HTMLElement;
   startButton?.addEventListener("click", function () {
-    // Disable Start button and enable Stop button
-    startButton.disabled = true;
-    stopButton.disabled = false;
+    const isStartButtonON =	startButton.classList.contains("fa-play");
 
-    startTyping();
-  });
+    if (isStartButtonON) {
+      startButton.classList.remove("fa-play");
+      startButton.classList.add("fa-pause");
 
-  
-  stopButton?.addEventListener("click", function () {
-    // Disable Stop button and enable Start button
-    startButton.disabled = false;
-    stopButton.disabled = true;
-
-    stopClicking();
-  });
+      startTyping();
+    }else{
+      startButton.classList.remove("fa-pause");
+      startButton.classList.add("fa-play");
+      stopClicking();
+    }
+  })
+	 
+ 
 });

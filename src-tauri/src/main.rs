@@ -9,9 +9,7 @@ use enigo::{
     Direction::{Press},
     Enigo, Key, Keyboard, Settings
 };
-
-
-
+use tauri::SystemTray;
 
 #[tauri::command]
 fn start_typing(interval_secs: u64, state: State<'_, AppState>) {
@@ -48,11 +46,14 @@ struct AppState {
 }
 
 fn main() {
+    let tray = SystemTray::new();
+
     tauri::Builder::default()
         .manage(AppState {
             running: Arc::new(Mutex::new(false)),
             interval: Arc::new(Mutex::new(60)),
         })
+        .system_tray(tray)
         .invoke_handler(tauri::generate_handler![stop_mouse_click, start_typing])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

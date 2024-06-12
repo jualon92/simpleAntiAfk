@@ -13,14 +13,18 @@
 <body>
 
 
-  <div class="h-screen bg-gray-200">
-	
-    <div class="flex justify-center items-center h-screen">
-      
-      <button class=" w-24 h-24 rounded-full bg-blue-500  hover:bg-blue-800 active:bg-blue-800  active:translate-y-0.5 focus:outline-none" onclick="play();" id="play-btn"><i class="fa fa-play fa-2x text-white" id="play-icon"></i></button>
-  
+  <div class="h-screen bg-gray-200 ">
+
+    <div class="flex flex-col justify-center items-center h-screen">
+
+      <button
+        class=" w-24 h-24 rounded-full bg-blue-500  hover:bg-blue-800 active:bg-blue-800  active:translate-y-0.5 focus:outline-none"
+        onclick="play();" id="play-btn"><i class="fa fa-play fa-2x text-white" id="play-icon"></i></button>
+
+        
+        <span title="Status: paused" class=" transition duration-200 w-4 h-4  transform translate-y-11  bg-red-500 rounded-full" id="status-circle">   </span>
+       
     </div>
-  
   </div>
 </body>
 

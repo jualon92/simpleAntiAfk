@@ -11,6 +11,14 @@
     "version": "0.0.1"
   },
   "tauri": {
+    "updater": {
+		"active": true,
+		"endpoints": [
+			"https://cdn.crabnebula.app/update/software-las-acacias/simple-anti-afk/{{target}}-{{arch}}/{{current_version}}"
+		],
+		"dialog": true,
+		"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEFBNTYzNTFBQTZFRjFEQjAKUldTd0hlK21HalZXcWdzc0d4SVpoR3RDWHZKZ1dOVjZjb29BZ243a2xCYU1yUDdVR25NcVRLbU8K"
+	},
     "allowlist": {
       "all": false,
       "shell": {

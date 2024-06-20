@@ -1,5 +1,7 @@
 import { invoke } from "@tauri-apps/api";
 
+ 
+
 // actions.ts
 const TIME_INTERVAL = 60 * 5; // 5min
 export async function stopClicking() {

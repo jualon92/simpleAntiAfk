@@ -11,8 +11,8 @@ use enigo::{
 };
 use tauri::SystemTray;
 use tauri::AppHandle;
+use tauri::{CustomMenuItem, SystemTrayMenu, SystemTrayMenuItem};
 use tauri::Manager;
-
 #[tauri::command]
 fn start_typing(interval_secs: u64, state: State<'_, AppState>) {
     let running = state.running.clone();
@@ -57,8 +57,17 @@ struct AppState {
 }
 
 fn main() {
-    let tray = SystemTray::new();
+    let quit = CustomMenuItem::new("quit".to_string(), "Quit");
+    let hide = CustomMenuItem::new("hide".to_string(), "Hide");
 
+    let tray_menu = SystemTrayMenu::new()
+      .add_item(quit)
+      .add_native_item(SystemTrayMenuItem::Separator)
+      .add_item(hide);
+ 
+    let tray = SystemTray::new().with_menu(tray_menu).with_tooltip("auto clicker");
+
+   
     tauri::Builder::default()
         .setup(|app| {
             let app_handle = app.app_handle(); // Obtener AppHandle

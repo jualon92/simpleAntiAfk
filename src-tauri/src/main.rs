@@ -11,7 +11,7 @@ use enigo::{
 };
 use tauri::SystemTray;
 use tauri::AppHandle;
-use tauri::{CustomMenuItem, SystemTrayMenu, SystemTrayMenuItem};
+use tauri::{CustomMenuItem, SystemTrayMenu, SystemTrayMenuItem,  SystemTrayEvent};
 use tauri::Manager;
 #[tauri::command]
 fn start_typing(interval_secs: u64, state: State<'_, AppState>) {
@@ -79,6 +79,42 @@ fn main() {
             Ok(())
         })
         .system_tray(tray)
+        .on_system_tray_event(|app, event| match event {
+            SystemTrayEvent::LeftClick {
+              position: _,
+              size: _,
+              ..
+            } => {
+              println!("system tray received a left click");
+            }
+            SystemTrayEvent::RightClick {
+              position: _,
+              size: _,
+              ..
+            } => {
+              println!("system tray received a right click");
+            }
+            SystemTrayEvent::DoubleClick {
+              position: _,
+              size: _,
+              ..
+            } => {
+              println!("system tray received a double click");
+            }
+            SystemTrayEvent::MenuItemClick { id, .. } => {
+              match id.as_str() {
+                "quit" => {
+                  std::process::exit(0);
+                }
+                "hide" => {
+                  let window = app.get_window("main").unwrap();
+                  window.hide().unwrap();
+                }
+                _ => {}
+              }
+            }
+            _ => {}
+          })
         .invoke_handler(tauri::generate_handler![stop_mouse_click, start_typing])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

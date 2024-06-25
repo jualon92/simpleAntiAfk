@@ -19,3 +19,12 @@ export async function startTyping() {
     console.error("Failed to start typing:", e);
   }
 }
+
+
+export async function hideApp() {
+  try {
+    await invoke("hide_app");
+  } catch (e) {
+    console.error("Failed to hide", e);
+  }
+}

@@ -49,6 +49,14 @@ fn stop_mouse_click(state: State<'_, AppState>) {
      
 }
 
+#[tauri::command]
+fn hide_app(state: State<'_, AppState>) {
+    let app_handle = &state.app_handle;
+    let window = app_handle.get_window("main").unwrap();
+    window.hide().unwrap();
+     
+}
+
 
 struct AppState {
     running: Arc<Mutex<bool>>,
@@ -59,13 +67,14 @@ struct AppState {
 fn main() {
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
     let hide = CustomMenuItem::new("hide".to_string(), "Hide");
-
+    let show = CustomMenuItem::new("show".to_string(), "Show");
     let tray_menu = SystemTrayMenu::new()
       .add_item(quit)
       .add_native_item(SystemTrayMenuItem::Separator)
-      .add_item(hide);
+      .add_item(hide)
+      .add_item(show);
  
-    let tray = SystemTray::new().with_menu(tray_menu).with_tooltip("auto clicker");
+    let tray = SystemTray::new().with_menu(tray_menu).with_tooltip("anti-afk");
 
    
     tauri::Builder::default()
@@ -110,12 +119,16 @@ fn main() {
                   let window = app.get_window("main").unwrap();
                   window.hide().unwrap();
                 }
+                "show" => {
+                    let window = app.get_window("main").unwrap();
+                    window.show().unwrap();
+                  }
                 _ => {}
               }
             }
             _ => {}
           })
-        .invoke_handler(tauri::generate_handler![stop_mouse_click, start_typing])
+        .invoke_handler(tauri::generate_handler![stop_mouse_click, start_typing, hide_app])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

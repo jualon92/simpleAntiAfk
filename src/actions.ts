@@ -1,4 +1,5 @@
 import { invoke } from "@tauri-apps/api";
+import notie from "notie";
 
  
 
@@ -28,3 +29,14 @@ export async function hideApp() {
     console.error("Failed to hide", e);
   }
 }
+
+
+export function hideMyApp() {
+  notie.alert({
+    type:2,
+    text: "hiding in the shadows... 😶‍🌫️"
+  })
+  setTimeout(() => hideApp(), 1500);  
+
+}
+   

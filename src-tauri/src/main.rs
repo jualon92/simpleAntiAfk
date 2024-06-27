@@ -53,6 +53,14 @@ fn stop_mouse_click(state: State<'_, AppState>) {
 fn hide_app(state: State<'_, AppState>) {
     let app_handle = &state.app_handle;
     let window = app_handle.get_window("main").unwrap();
+    app_handle.tray_handle()
+    .set_menu(
+        SystemTrayMenu::new()
+            .add_item(CustomMenuItem::new("show".to_string(), "Show"))
+            .add_native_item(SystemTrayMenuItem::Separator)
+            .add_item(CustomMenuItem::new("quit".to_string(), "Salir"))
+    )
+    .unwrap();
     window.hide().unwrap();
 }
 

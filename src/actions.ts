@@ -1,4 +1,5 @@
 import { invoke } from "@tauri-apps/api";
+import notie from "notie";
 
  
 
@@ -19,3 +20,23 @@ export async function startTyping() {
     console.error("Failed to start typing:", e);
   }
 }
+
+
+export async function hideApp() {
+  try {
+    await invoke("hide_app");
+  } catch (e) {
+    console.error("Failed to hide", e);
+  }
+}
+
+
+export function hideMyApp() {
+  notie.alert({
+    type:2,
+    text: "hiding in the shadows... 😶‍🌫️"
+  })
+  setTimeout(() => hideApp(), 1500);  
+
+}
+   

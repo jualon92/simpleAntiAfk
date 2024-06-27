@@ -21,8 +21,8 @@
     "windows": [
       {
         "title": "anti-afk",
-        "width": 400,
-        "height": 300
+        "width": 240,
+        "height": 360
       }
     ],
     "security": {

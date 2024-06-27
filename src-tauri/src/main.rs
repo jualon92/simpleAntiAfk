@@ -34,7 +34,7 @@ fn start_typing(interval_secs: u64, state: State<'_, AppState>) {
                 }
             }
             thread::sleep(Duration::from_secs(interval_secs));
-            enigo.key(Key::F24, Press).unwrap();
+            enigo.key(Key::F19, Press).unwrap();
         }
     });
 }

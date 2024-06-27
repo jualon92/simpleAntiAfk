@@ -1,7 +1,7 @@
 // Purpose: Main entry point for the application.
-import { hideApp } from "./actions";
+import {  hideMyApp } from "./actions";
 import { play } from "./play";
-import notie from 'notie'
+
 document.addEventListener("DOMContentLoaded", function () {
 
   const startButton = document.getElementById('play-btn') as HTMLElement;
@@ -10,12 +10,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const hideButton = document.getElementById('hide-btn') as HTMLElement;
   startButton?.addEventListener("click",  () => play(startIcon, statusCircle));
 	hideButton?.addEventListener("click", () => {
-    notie.alert({
-      type:2,
-      text: "hiding in the shadows... 😶‍🌫️"
-    })
-    setTimeout(() => 
-      hideApp(), 1500);  
-  });
+    hideMyApp();
 })
+})
+
+//@ts-ignore
+window.__TAURI__.event.listen('hide-window', () => {
+  // Llama a la función que deseas ejecutar cuando se reciba el evento
+  console.log("El backend indica ocultar la ventana");
+  // Aquí puedes llamar a cualquier función, por ejemplo:
+  // hideMyWindowFunction();
+  hideMyApp();
+  
+});
+
+ 
  

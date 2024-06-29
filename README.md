@@ -2,6 +2,9 @@
 
 This application is designed to help users avoid being marked as "Away" or "AFK".
 
+To download the installer, go to [this GitHub release page](https://github.com/jualon92/simpleAntiAfk/releases/tag/app-v0.0.1) or visit [this CloudNebula page](https://web.crabnebula.cloud/software-las-acacias/simple-anti-afk/releases).
+
+
 ## How it works:
 
 - **Key Press Simulation:** Simulates pressing the F19 key to prevent the system from detecting inactivity. 

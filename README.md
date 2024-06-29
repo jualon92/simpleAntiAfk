@@ -6,23 +6,27 @@ This application is designed to help users avoid being marked as "Away" or "AFK"
 
 It uses Tauri, a secure, lightweight, and cross-platform desktop application framework
 
+
+ 
 ## Features
 
 - **Key Press Simulation**: Simulates pressing the F23 key to prevent the system from detecting inactivity.<b> The F23 key was chosen to minimize interference with the user's normal activities. </b> 
 
+## How to install
+Check https://github.com/jualon92/simpleAntiAfk/releases  or  
+https://web.crabnebula.cloud/software-las-acacias/simple-anti-afk/releases for the installers.
+
+
 ## How to run tests
 <code> npm i</code> 
 
-<code> npm run tauri dev</code> 
+<code> npm run test</code> 
 
 ## How are installers made?
 Once a push is made to the release branch, a gitHub Actions script creates all the installers and uploads them to the release section. 
 
 More information at: https://tauri.app/v1/guides/building/cross-platform
-
-## How to install
-Check https://github.com/jualon92/simpleAntiAfk/releases  or  
-https://web.crabnebula.cloud/software-las-acacias/simple-anti-afk/releases for the installers.
+ 
 
 ## Development
 

@@ -1,44 +1,35 @@
- 
+# Anti-AFK Application
 
-# Anti-AFK Application      
- 
-This application is designed to help users avoid being marked as "Away" or "AFK". 
+This application is designed to help users avoid being marked as "Away" or "AFK".
 
-It uses Tauri, a secure, lightweight, and cross-platform desktop application framework
+## How it works:
 
+- **Key Press Simulation:** Simulates pressing the F19 key to prevent the system from detecting inactivity. 
 
- 
-## Features
+## Features:
 
-- **Key Press Simulation**: Simulates pressing the F23 key to prevent the system from detecting inactivity.<b> The F23 key was chosen to minimize interference with the user's normal activities. </b> 
+- **Non-obtrusive:** Key F19 was selected to operate discreetly without disrupting daily operations.
+- **Modern UI:** Uses Tailwind CSS and Toasts to clearly communicate the current state.
+- **Discrete:** App can be hidden from the toolbar or managed directly from the system tray.
+- **Cross-platform:** Thanks to Tauri, it can be bundled for Windows, Linux, and macOS.
 
-## How to install
-Check https://github.com/jualon92/simpleAntiAfk/releases  or  
-https://web.crabnebula.cloud/software-las-acacias/simple-anti-afk/releases for the installers.
+## Development:
 
-
-## How to run tests
-<code> npm i</code> 
-
-<code> npm run test</code> 
-
-## How are installers made?
-Once a push is made to the release branch, a gitHub Actions script creates all the installers and uploads them to the release section. 
-
-More information at: https://tauri.app/v1/guides/building/cross-platform
- 
-
-## Development
-
-This application was developed using Tauri
-
-For the frontend UI, we chose to use TypeScript +  along with Tailwind due to their lightweight nature.
-
-For more information on how to develop with Tauri, please refer to the [official Tauri documentation](https://tauri.studio).
+This application was developed using Tauri, a secure, lightweight, and cross-platform desktop application framework.
 
 
-## Current Tasks
-https://synonymous-bolt-117.notion.site/6a7e39b76f9d4f039419966ae1e7e5db?v=71b94a57d43c4f548e7508f8d6a8debf
-## License
+ - For the frontend UI, we utilized `Tailwind CSS` and Toast library `notie` to clearly communicate the current state.
 
-This application is distributed under the MIT license. Please refer to the `LICENSE` file for more details.
+ - For bundling and distribution, we utilize Tauri along with `GitHub Actions` and CloudNebula.
+
+ - We chose `Jest` and `jsDOM`  as our testing suite to test DOM changes and logic.
+
+For more information on how to develop with Tauri, please refer to the [official Tauri documentation](https://tauri.studio/en/docs/getting-started/intro).
+
+
+## How to run tests:
+
+```bash
+npm install
+npm run test
+

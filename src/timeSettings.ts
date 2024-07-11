@@ -1,28 +1,31 @@
 import notie from "notie";
 
-export function handleTimerSettings() {
-  //set min time for end time input
-  const startTimeInput = document.getElementById(
-    "start-time"
-  ) as HTMLInputElement;
-
-  const endTimeInput = document.getElementById("end-time") as HTMLInputElement;
-  startTimeInput.addEventListener("change", function () {
+export function handleTimerSettings(startTimeInput: HTMLInputElement, endTimeInput: HTMLInputElement) {
+   startTimeInput.addEventListener("change", function () {
     endTimeInput.min = this.value;
   });
 
+  const setOffTimerButton = document.getElementById("set-offtimer-btn") as HTMLElement
+ 
 
   //notifications
-  endTimeInput.addEventListener("change", function () {
+   setOffTimerButton.addEventListener("click", function () {
     if (endTimeInput.validity.valid) {
         notie.alert({
             type:1,
-            text: "Timer set... 🕰️"
+            text: `App will be inactive from: \n ${startTimeInput.value} to ${endTimeInput.value} ... 🕰️`,
+               position: "bottom"
           })
+
+         //save on localstorage
+         window.localStorage.setItem("endTime", endTimeInput.value);
+         window.localStorage.setItem("startTime", startTimeInput.value);
+
     }else{
         notie.alert({
             type:3,
-            text: "Invalid time... ⏰"
+            text: "Invalid time... ⏰",
+            position: "bottom"
           })
     }
    

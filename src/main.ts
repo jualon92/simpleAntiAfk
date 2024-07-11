@@ -17,11 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
     hideMyApp();
   });
 
-  handleTimerSettings();
-
- 
- 
-
  
 
 });

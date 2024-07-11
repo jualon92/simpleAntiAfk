@@ -2,6 +2,10 @@
 import { hideMyApp } from "./actions";
 import { play } from "./play";
 import { handleTimerSettings } from "./timeSettings";
+import { initFlowbite } from 'flowbite'
+
+// initialize components based on data attribute selectors
+initFlowbite();
 
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("play-btn") as HTMLElement;
@@ -15,6 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   handleTimerSettings();
 
+ 
+ 
+
+ 
 
 });
 

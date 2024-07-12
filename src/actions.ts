@@ -30,6 +30,13 @@ export async function hideApp() {
   }
 }
 
+export async function setTimerOff(startTime: string, endTime: string) {
+  try {
+    await invoke("set_timer_off", { startTime, endTime });
+  } catch (e) {
+    console.error("Failed to set timer off", e);
+  }
+}
 
 export function hideMyApp() {
   notie.alert({

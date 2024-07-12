@@ -1,4 +1,5 @@
 import notie from "notie";
+import { setTimerOff } from "./actions";
 
 export function handleTimerSettings(startTimeInput: HTMLInputElement, endTimeInput: HTMLInputElement) {
    startTimeInput.addEventListener("change", function () {
@@ -20,6 +21,10 @@ export function handleTimerSettings(startTimeInput: HTMLInputElement, endTimeInp
          //save on localstorage
          window.localStorage.setItem("endTime", endTimeInput.value);
          window.localStorage.setItem("startTime", startTimeInput.value);
+
+
+         //backend
+         setTimerOff(startTimeInput.value, endTimeInput.value);
 
     }else{
         notie.alert({

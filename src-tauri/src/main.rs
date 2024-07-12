@@ -25,78 +25,81 @@ lazy_static! {
     static ref TIMER_OFF: Mutex<Option<TimerOff>> = Mutex::new(None);
 }
 
-//  set time range state
 #[tauri::command]
 fn set_timer_off(start_time: &str, end_time: &str) {
-    //parse string dates to NaiveTime
-    let start_time = NaiveTime::parse_from_str(start_time, "%H:%M").unwrap();
-    let end_time = NaiveTime::parse_from_str(end_time, "%H:%M").unwrap();
+    let start_time = NaiveTime::parse_from_str(start_time, "%H:%M")
+        .expect("Invalid start time format");
+    let end_time = NaiveTime::parse_from_str(end_time, "%H:%M")
+        .expect("Invalid end time format");
 
-    //set state
     let mut timer_off = TIMER_OFF.lock().unwrap();
     *timer_off = Some(TimerOff { start_time, end_time });
 }
 
-
-//TODO: refactor
 #[tauri::command]
 fn start_typing(interval_secs: u64, state: State<'_, AppState>) {
- 
     let running = state.running.clone();
     let interval = state.interval.clone();
 
-    if let Ok(mut interval_guard) = interval.lock() {
+    {
+        let mut interval_guard = interval.lock().unwrap();
         *interval_guard = interval_secs;
-    } else {
-        eprintln!("Error al bloquear el intervalo.");
-        return;
     }
 
-    if let Ok(mut running_guard) = running.lock() {
+    {
+        let mut running_guard = running.lock().unwrap();
         *running_guard = true;
-    } else {
-        eprintln!("Error al bloquear 'running'.");
+    }
+
+    let app_handle = state.app_handle.clone();
+    if let Err(e) = app_handle.tray_handle().set_icon(
+        tauri::Icon::Raw(include_bytes!("../icons/power-on.png").to_vec()),
+    ) {
+        eprintln!("Error setting tray icon: {}", e);
         return;
     }
 
-    let app_handle = &state.app_handle;
-    if let Err(e) = app_handle
-        .tray_handle()
-        .set_icon(tauri::Icon::Raw(include_bytes!("../icons/power-on.png").to_vec())) {
-            eprintln!("Error al establecer el icono de la bandeja: {}", e);
-            return;
-    }
     thread::spawn(move || {
         let mut enigo = match Enigo::new(&Settings::default()) {
             Ok(enigo) => enigo,
             Err(e) => {
-                eprintln!("Error al crear Enigo: {}", e);
+                eprintln!("Error creating Enigo: {}", e);
                 return;
             }
         };
-    
-        while let Ok(running) = running.lock() {
-            //early return if running is false
-            if !*running {
+
+        loop {
+            let running_guard = running.lock().unwrap();
+            if !*running_guard {
                 break;
             }
-            drop(running);  
-    
-            let current_time = NaiveTime::from_hms(chrono::Local::now().hour(), chrono::Local::now().minute(), 0);
-            let timer_off = TIMER_OFF.lock().unwrap();
-            let press_key = if let Some(timer_off) = &*timer_off {
-                !(current_time >= timer_off.start_time && current_time <= timer_off.end_time)
-            } else {
-                true  
+            drop(running_guard);
+
+            let current_time = NaiveTime::from_hms(
+                chrono::Local::now().hour(),
+                chrono::Local::now().minute(),
+                0,
+            );
+
+            let press_key = {
+                let timer_off_guard = TIMER_OFF.lock().unwrap();
+                if let Some(timer_off) = &*timer_off_guard {
+                    !(current_time >= timer_off.start_time && current_time <= timer_off.end_time)
+                } else {
+                    true
+                }
             };
-    
 
             if press_key {
-                enigo.key(Key::F24, Press).unwrap();
-                thread::sleep(Duration::from_secs(interval_secs));
+                println!("Pressing F24");
+                if enigo.key(Key::F24, Press).is_err() {
+                    eprintln!("Error pressing key");
+                }
             } else {
-                thread::sleep(Duration::from_secs(interval_secs)); // Ajusta este tiempo según sea necesario
+                println!("Ignoring press key");
             }
+
+            thread::sleep(Duration::from_secs(interval_secs));
         }
     });
 }

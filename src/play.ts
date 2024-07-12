@@ -10,7 +10,8 @@ export const play = (startIcon: HTMLElement, statusCircle: HTMLElement) => {
       statusCircle.style.backgroundColor = "#48BB78";
       notie.alert({
         type:1,
-        text: "app is running in the background"
+        text: "app is running in the background",
+        position: "bottom"
       })
       
       startTyping();
@@ -21,7 +22,8 @@ export const play = (startIcon: HTMLElement, statusCircle: HTMLElement) => {
 
       notie.alert({
         type:3,
-        text: "app is paused"
+        text: "app is paused",
+        position: "bottom"
       })
       
       stopClicking();

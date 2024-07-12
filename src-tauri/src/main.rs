@@ -10,38 +10,103 @@ use tauri::SystemTray;
 use tauri::AppHandle;
 use tauri::{ CustomMenuItem, SystemTrayMenu, SystemTrayMenuItem, SystemTrayEvent };
 use tauri::Manager;
+use chrono::NaiveTime;
+use chrono::Timelike; 
+use lazy_static::lazy_static;
+
+// Estructura para almacenar los tiempos de inicio y fin
+struct TimerOff {
+    start_time: NaiveTime,
+    end_time: NaiveTime,
+}
+
+// Usando lazy_static para almacenar los tiempos de manera segura entre hilos
+lazy_static! {
+    static ref TIMER_OFF: Mutex<Option<TimerOff>> = Mutex::new(None);
+}
+
+//  set time range state
+#[tauri::command]
+fn set_timer_off(start_time: &str, end_time: &str) {
+    //parse string dates to NaiveTime
+    let start_time = NaiveTime::parse_from_str(start_time, "%H:%M").unwrap();
+    let end_time = NaiveTime::parse_from_str(end_time, "%H:%M").unwrap();
+
+    //set state
+    let mut timer_off = TIMER_OFF.lock().unwrap();
+    *timer_off = Some(TimerOff { start_time, end_time });
+}
+
+
+//TODO: refactor
 #[tauri::command]
 fn start_typing(interval_secs: u64, state: State<'_, AppState>) {
+ 
     let running = state.running.clone();
     let interval = state.interval.clone();
 
-    *interval.lock().unwrap() = interval_secs;
-    *running.lock().unwrap() = true;
+    if let Ok(mut interval_guard) = interval.lock() {
+        *interval_guard = interval_secs;
+    } else {
+        eprintln!("Error al bloquear el intervalo.");
+        return;
+    }
+
+    if let Ok(mut running_guard) = running.lock() {
+        *running_guard = true;
+    } else {
+        eprintln!("Error al bloquear 'running'.");
+        return;
+    }
 
     let app_handle = &state.app_handle;
-    app_handle
+    if let Err(e) = app_handle
         .tray_handle()
-        .set_icon(tauri::Icon::Raw(include_bytes!("../icons/power-on.png").to_vec()))
-        .unwrap();
-
+        .set_icon(tauri::Icon::Raw(include_bytes!("../icons/power-on.png").to_vec())) {
+            eprintln!("Error al establecer el icono de la bandeja: {}", e);
+            return;
+    }
     thread::spawn(move || {
-        let mut enigo = Enigo::new(&Settings::default()).unwrap();
-        loop {
-            {
-                let running = running.lock().unwrap();
-                if !*running {
-                    break;
-                }
+        let mut enigo = match Enigo::new(&Settings::default()) {
+            Ok(enigo) => enigo,
+            Err(e) => {
+                eprintln!("Error al crear Enigo: {}", e);
+                return;
             }
-            thread::sleep(Duration::from_secs(interval_secs));
-            enigo.key(Key::F24, Press).unwrap();
+        };
+    
+        while let Ok(running) = running.lock() {
+            //early return if running is false
+            if !*running {
+                break;
+            }
+            drop(running);  
+    
+            let current_time = NaiveTime::from_hms(chrono::Local::now().hour(), chrono::Local::now().minute(), 0);
+            let timer_off = TIMER_OFF.lock().unwrap();
+            let press_key = if let Some(timer_off) = &*timer_off {
+                !(current_time >= timer_off.start_time && current_time <= timer_off.end_time)
+            } else {
+                true  
+            };
+    
+
+            if press_key {
+                enigo.key(Key::F24, Press).unwrap();
+                thread::sleep(Duration::from_secs(interval_secs));
+            } else {
+                thread::sleep(Duration::from_secs(interval_secs)); // Ajusta este tiempo según sea necesario
+            }
         }
     });
 }
 #[tauri::command]
 fn stop_mouse_click(state: State<'_, AppState>) {
-    let mut running = state.running.lock().unwrap();
-    *running = false;
+    if let Ok(mut running_guard) = state.running.lock() {
+        *running_guard = false;
+    } else {
+        eprintln!("Error al bloquear 'running'.");
+    }
     let app_handle = &state.app_handle;
     app_handle
         .tray_handle()
@@ -142,7 +207,7 @@ fn main() {
                 _ => {}
             }
         })
-        .invoke_handler(tauri::generate_handler![stop_mouse_click, start_typing, hide_app])
+        .invoke_handler(tauri::generate_handler![stop_mouse_click, start_typing, hide_app, set_timer_off])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

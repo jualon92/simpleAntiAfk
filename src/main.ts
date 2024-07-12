@@ -1,5 +1,5 @@
 // Purpose: Main entry point for the application.
-import { hideMyApp } from "./actions";
+import { hideMyApp, setTimerOff, stopClicking } from "./actions";
 import { play } from "./play";
 import { handleTimerSettings } from "./timeSettings";
 import { initFlowbite } from 'flowbite'
@@ -7,7 +7,16 @@ import { initFlowbite } from 'flowbite'
 // initialize components based on data attribute selectors
 initFlowbite();
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
+
+  await stopClicking(); 
+
+  const startTime = window.localStorage.getItem("startTime");
+  const endTime = window.localStorage.getItem("endTime");
+
+    if (startTime && endTime) {
+    await setTimerOff(startTime, endTime);
+  }
   const startButton = document.getElementById("play-btn") as HTMLElement;
   const startIcon = document.getElementById("play-icon") as HTMLElement;
   const statusCircle = document.getElementById("status-circle") as HTMLElement;

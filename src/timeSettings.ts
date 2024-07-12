@@ -23,9 +23,6 @@ export function handleTimerSettings(startTimeInput: HTMLInputElement, endTimeInp
          window.localStorage.setItem("startTime", startTimeInput.value);
 
 
-         //backend
-         setTimerOff(startTimeInput.value, endTimeInput.value);
-
     }else{
         notie.alert({
             type:3,

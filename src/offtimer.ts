@@ -1,11 +1,13 @@
 
 import { initFlowbite } from 'flowbite'
 import { handleTimerSettings } from './timeSettings';
+import { stopClicking } from './actions';
 
 initFlowbite();
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
     
+    await stopClicking()
     const startTimeInput = document.getElementById(
         "start-time"
       ) as HTMLInputElement;

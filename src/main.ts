@@ -3,12 +3,17 @@ import { hideMyApp, setTimerOff, stopClicking } from "./actions";
 import { play } from "./play";
 import { handleTimerSettings } from "./timeSettings";
 import { initFlowbite } from 'flowbite'
+import "./i18n/i18n";
 
+import i18n from 'i18next';
 // initialize components based on data attribute selectors
 initFlowbite();
 
+//TODO: refactor this
 document.addEventListener("DOMContentLoaded", async function () {
 
+
+  //timer settings
   await stopClicking(); 
 
   const startTime = window.localStorage.getItem("startTime");
@@ -17,6 +22,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (startTime && endTime) {
     await setTimerOff(startTime, endTime);
   }
+
+
+  //play app
   const startButton = document.getElementById("play-btn") as HTMLElement;
   const startIcon = document.getElementById("play-icon") as HTMLElement;
   const statusCircle = document.getElementById("status-circle") as HTMLElement;
@@ -26,11 +34,17 @@ document.addEventListener("DOMContentLoaded", async function () {
     hideMyApp();
   });
 
- 
+  //translates
+  const welcomeElement = document.getElementById('title-timer') as HTMLElement;
+  welcomeElement.innerText = i18n.t('title-timer');
+  const dashboardElement = document.getElementById('dashboard') as HTMLElement;
+  dashboardElement.innerText = i18n.t('dashboard');
 
 });
 
  
+
+
 //@ts-ignore
 window.__TAURI__.event.listen('hide-window', () => {
   // Llama a la función que deseas ejecutar cuando se reciba el evento

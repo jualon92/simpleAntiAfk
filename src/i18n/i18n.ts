@@ -11,6 +11,9 @@ const resources = {
       "disabledMessage": 'The app will be <strong>disabled</strong> during these hours',
       "fromTime": "Off From",
       "toTime": "To",
+      "appPaused": "App is paused",
+      "appRunning": "App is running",
+      "hideApp": "Hiding in the shadows... 😶‍🌫️"
     }
   },
   es: {
@@ -22,6 +25,10 @@ const resources = {
         "disabledMessage": 'La aplicación estará <strong>desactivada</strong> durante estas horas',
       "fromTime": "Apagar desde",
       "toTime": "Hasta",
+        "appPaused":  "La aplicación está en pausa",
+        "appRunning": "La aplicación está en ejecución",
+        "hideApp": "Ocultandose en las sombras... 🥷ññ+.."
+
       }
   }
 };

@@ -9,10 +9,16 @@ import i18n from 'i18next';
 // initialize components based on data attribute selectors
 initFlowbite();
 
+ 
+
 //TODO: refactor this
 document.addEventListener("DOMContentLoaded", async function () {
 
+  const hideButton = document.getElementById("hide-btn") as HTMLElement;
+ 
+  hideButton.innerText = i18n.t('hideButton');
 
+  
   //timer settings
   await stopClicking(); 
 
@@ -28,18 +34,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   const startButton = document.getElementById("play-btn") as HTMLElement;
   const startIcon = document.getElementById("play-icon") as HTMLElement;
   const statusCircle = document.getElementById("status-circle") as HTMLElement;
-  const hideButton = document.getElementById("hide-btn") as HTMLElement;
-  startButton?.addEventListener("click", () => play(startIcon, statusCircle));
+   startButton?.addEventListener("click", () => play(startIcon, statusCircle));
   hideButton?.addEventListener("click", () => {
     hideMyApp();
   });
 
   //translates
-  const welcomeElement = document.getElementById('title-timer') as HTMLElement;
+/*   const welcomeElement = document.getElementById('title-timer') as HTMLElement;
   welcomeElement.innerText = i18n.t('title-timer');
   const dashboardElement = document.getElementById('dashboard') as HTMLElement;
   dashboardElement.innerText = i18n.t('dashboard');
-
+  */
+ 
 });
 
  

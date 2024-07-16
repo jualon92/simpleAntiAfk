@@ -27,7 +27,7 @@ const resources = {
       "toTime": "Hasta",
         "appPaused":  "La aplicación está en pausa",
         "appRunning": "La aplicación está en ejecución",
-        "hideApp": "Ocultandose en las sombras... 🥷ññ+.."
+        "hideApp": "Ocultandose en las sombras... 😶‍🌫"
 
       }
   }

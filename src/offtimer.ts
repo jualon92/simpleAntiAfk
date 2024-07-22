@@ -5,10 +5,13 @@ import { stopClicking } from './actions';
 import "./i18n/i18n";
 
 import i18n from 'i18next';
+import notie from 'notie';
 initFlowbite();
 
 document.addEventListener("DOMContentLoaded", async function () {
-    
+  const clearDatesButton = document.getElementById("clear-offtimer-btn") as HTMLElement;
+
+   
   const offButton = document.getElementById('set-offtimer-btn') as HTMLElement;
   offButton.innerText = i18n.t('offButton');
   const disabledMessage = document.getElementById('disabled-message') as HTMLElement;
@@ -34,6 +37,18 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
 
+    clearDatesButton.addEventListener("click", function () {
+        window.localStorage.clear()
+        //clear inputs
+        startTimeInput.value = "";
+        endTimeInput.value = "";
+        notie.alert({
+            type: 1,
+            text: "Timer cleared",
+            position: "bottom"
+          })
+    })
+ 
     handleTimerSettings(startTimeInput, endTimeInput);
   });
 

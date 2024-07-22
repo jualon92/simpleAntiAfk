@@ -1,5 +1,4 @@
 import notie from "notie";
-import { setTimerOff } from "./actions";
 
 export function handleTimerSettings(startTimeInput: HTMLInputElement, endTimeInput: HTMLInputElement) {
    startTimeInput.addEventListener("change", function () {

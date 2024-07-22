@@ -1,7 +1,6 @@
 // Purpose: Main entry point for the application.
 import { hideMyApp, setTimerOff, stopClicking } from "./actions";
 import { play } from "./play";
-import { handleTimerSettings } from "./timeSettings";
 import { initFlowbite } from 'flowbite'
 import "./i18n/i18n";
 

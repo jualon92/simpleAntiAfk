@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-
+import { resolve } from 'path'
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
 
@@ -8,6 +8,14 @@ export default defineConfig(async () => ({
   // 1. prevent vite from obscuring rust errors
   clearScreen: false,
   // 2. tauri expects a fixed port, fail if that port is not available
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        nested: resolve(__dirname, 'offtimer.html'),
+      },
+    }
+  },
   server: {
     port: 1420,
     strictPort: true,

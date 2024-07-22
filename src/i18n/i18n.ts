@@ -13,7 +13,8 @@ const resources = {
       "toTime": "To",
       "appPaused": "App is paused",
       "appRunning": "App is running",
-      "hideApp": "Hiding in the shadows... 😶‍🌫️"
+      "hideApp": "Hiding in the shadows... 😶‍🌫️",
+      "clearButton": "Clear Timer"
     }
   },
   es: {
@@ -27,7 +28,8 @@ const resources = {
       "toTime": "Hasta",
         "appPaused":  "La aplicación está en pausa",
         "appRunning": "La aplicación está en ejecución",
-        "hideApp": "Ocultandose en las sombras... 😶‍🌫"
+        "hideApp": "Ocultandose en las sombras... 😶‍🌫",
+           "clearButton": "Borrar timer"
 
       }
   }

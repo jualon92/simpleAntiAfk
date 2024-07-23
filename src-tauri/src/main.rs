@@ -83,6 +83,7 @@ fn start_typing(interval_secs: u64, state: State<'_, AppState>) {
 
             let press_key = {
                 let timer_off_guard = TIMER_OFF.lock().unwrap();
+                println!("{}", current_time );
                 if let Some(timer_off) = &*timer_off_guard {
                     !(current_time >= timer_off.start_time && current_time <= timer_off.end_time)
                 } else {
@@ -91,8 +92,8 @@ fn start_typing(interval_secs: u64, state: State<'_, AppState>) {
             };
 
             if press_key {
-                println!("Pressing F24");
-                if enigo.key(Key::F24, Press).is_err() {
+                println!("Pressing F14");
+                if enigo.key(Key::F14, Press).is_err() {
                     eprintln!("Error pressing key");
                 }
             } else {

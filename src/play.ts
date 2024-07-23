@@ -27,7 +27,8 @@ export const play = (startIcon: HTMLElement, statusCircle: HTMLElement) => {
       notie.alert({
         type:3,
         text: i18n.t('appPaused'),
-        position: "bottom"
+        position: "bottom",
+        
       })
       
       stopClicking();

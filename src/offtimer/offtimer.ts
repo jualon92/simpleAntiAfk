@@ -1,24 +1,21 @@
 import { initFlowbite } from "flowbite";
-import { handleTimerSettings } from "./timeSettings";
-import { stopClicking } from "./actions";
-import "./i18n/i18n";
+
+import { stopClicking } from "../actions";
+import "../i18n/i18n";
 
 import i18n from "i18next";
 import notie from "notie";
+import { handleTimerSettings } from "./timeSettings";
 initFlowbite();
 
 document.addEventListener("DOMContentLoaded", async function () {
-  const clearDatesButton = document.getElementById(
-    "clear-offtimer-btn"
-  ) as HTMLElement;
-
+ 
   setTranslate();
-
   await stopClicking();
-  const startTimeInput = document.getElementById(
-    "start-time"
-  ) as HTMLInputElement;
 
+  
+  //load from localstorage
+  const startTimeInput = document.getElementById("start-time") as HTMLInputElement;
   const endTimeInput = document.getElementById("end-time") as HTMLInputElement;
 
   const storedInitialTime = window.localStorage.getItem("startTime");
@@ -28,20 +25,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     endTimeInput.value = storedEndTime;
   }
 
-  clearDatesButton.addEventListener("click", function () {
-    window.localStorage.clear();
-    //clear inputs
-    startTimeInput.value = "";
-    endTimeInput.value = "";
-    notie.alert({
-      type: 1,
-      text: "Timer cleared",
-      position: "bottom",
-    });
-  });
-
+  //clear button
+  const clearDatesButton = document.getElementById("clear-offtimer-btn") as HTMLElement;
+  clearDatesButton.addEventListener("click", () => clearDate(startTimeInput, endTimeInput));
+    
+    
   handleTimerSettings(startTimeInput, endTimeInput);
 });
+
+
 
 function setTranslate() {
   const offButton = document.getElementById("set-offtimer-btn") as HTMLElement;
@@ -60,4 +52,19 @@ function setTranslate() {
     "clear-offtimer-btn"
   ) as HTMLElement;
   clearButton.innerText = i18n.t("clearButton");
+}
+
+
+function clearDate(startTimeInput: HTMLInputElement, endTimeInput: HTMLInputElement) {
+   
+  startTimeInput.value = "";
+  endTimeInput.value = "";
+  window.localStorage.removeItem("startTime");
+  window.localStorage.removeItem("endTime");
+
+  notie.alert({
+    type: 1,
+    text: i18n.t("cleared"),
+    position: "bottom",
+  });
 }

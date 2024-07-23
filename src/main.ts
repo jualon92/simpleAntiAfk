@@ -10,7 +10,6 @@ initFlowbite();
 
  
 
-//TODO: refactor this
 document.addEventListener("DOMContentLoaded", async function () {
 
   const hideButton = document.getElementById("hide-btn") as HTMLElement;
@@ -38,12 +37,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     hideMyApp();
   });
 
-  //translates
-/*   const welcomeElement = document.getElementById('title-timer') as HTMLElement;
-  welcomeElement.innerText = i18n.t('title-timer');
-  const dashboardElement = document.getElementById('dashboard') as HTMLElement;
-  dashboardElement.innerText = i18n.t('dashboard');
-  */
+
  
 });
 

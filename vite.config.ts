@@ -12,7 +12,7 @@ export default defineConfig(async () => ({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        nested: resolve(__dirname, 'offtimer.html'),
+        nested: resolve(__dirname, './src/offtimer/offtimer.html'),
       },
     }
   },

@@ -20,8 +20,7 @@ export function handleTimerSettings(startTimeInput: HTMLInputElement, endTimeInp
          //save on localstorage
          window.localStorage.setItem("endTime", endTimeInput.value);
          window.localStorage.setItem("startTime", startTimeInput.value);
-
-
+  
     }else{
         notie.alert({
             type:3,

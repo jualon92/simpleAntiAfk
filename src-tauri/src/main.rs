@@ -101,6 +101,8 @@ fn start_typing(interval_secs: u64, state: State<'_, AppState>) {
             }
 
             thread::sleep(Duration::from_secs(interval_secs));
+ 
+
         }
     });
 }

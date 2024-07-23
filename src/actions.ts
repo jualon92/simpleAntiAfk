@@ -1,5 +1,6 @@
 import { invoke } from "@tauri-apps/api";
 import notie from "notie";
+import i18n from "./i18n/i18n";
 
  
 
@@ -30,11 +31,20 @@ export async function hideApp() {
   }
 }
 
+export async function setTimerOff(startTime: string, endTime: string) {
+  try {
+    console.log("Setting timer off", startTime, endTime);
+    await invoke("set_timer_off", { startTime, endTime });
+  } catch (e) {
+    console.error("Failed to set timer off", e);
+  }
+}
 
 export function hideMyApp() {
   notie.alert({
     type:2,
-    text: "hiding in the shadows... 😶‍🌫️"
+    text: i18n.t('hideApp'),
+    position: "bottom"
   })
   setTimeout(() => hideApp(), 1500);  
 

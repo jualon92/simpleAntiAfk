@@ -1,5 +1,9 @@
 import notie from 'notie'
 import { startTyping, stopClicking } from "./actions";
+import "./i18n/i18n";
+
+import i18n from 'i18next';
+
 export const play = (startIcon: HTMLElement, statusCircle: HTMLElement) => { 
     const isStartButtonON =	startIcon.classList.contains("fa-play");
 
@@ -10,7 +14,8 @@ export const play = (startIcon: HTMLElement, statusCircle: HTMLElement) => {
       statusCircle.style.backgroundColor = "#48BB78";
       notie.alert({
         type:1,
-        text: "app is running in the background"
+        text: i18n.t('appRunning'),
+        position: "bottom"
       })
       
       startTyping();
@@ -21,7 +26,9 @@ export const play = (startIcon: HTMLElement, statusCircle: HTMLElement) => {
 
       notie.alert({
         type:3,
-        text: "app is paused"
+        text: i18n.t('appPaused'),
+        position: "bottom",
+        
       })
       
       stopClicking();

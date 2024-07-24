@@ -11,9 +11,9 @@ To download the installer, go to [this GitHub release page](https://github.com/j
 ## Features:
 
 - **Non-obtrusive:** 
-   - Key F14 was selected to operate without disrupting daily operations. 
-   - App can be hidden from the toolbar or managed directly from the system tray.
-   - The functionality to deactivate the app at a predetermined time range is available.
+   - Key F14 was selected to operate without disrupting daily operations.  
+   - App can be hidden from the toolbar, to avoid distractions. 
+   - the app can be configured to deactivate during specified hours.
 - **Cross-platform:** Thanks to Tauri, it can be bundled for Windows, Linux, and macOS as a lightweight bunddle.
 - **I18N:**  Detects the browser's language and translates accordingly.
 

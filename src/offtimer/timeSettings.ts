@@ -2,7 +2,7 @@ import notie from "notie";
 
 export function handleTimerSettings(startTimeInput: HTMLInputElement, endTimeInput: HTMLInputElement) {
    startTimeInput.addEventListener("change", function () {
-    endTimeInput.min = this.value;
+    /* endTimeInput.min = this.value; */
   });
 
   const setOffTimerButton = document.getElementById("set-offtimer-btn") as HTMLElement
